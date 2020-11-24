@@ -1,0 +1,104 @@
+{% extends "students/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Enrollment</h1>
+  </div>
+</div>
+
+<div class="container">
+  <select id="idnumber">
+  {% if request.session.studentid %}
+    <option selected= {{ request.session.studentid }}>{{ request.session.studentid }}</option>
+  {% else %}
+    <option selected="">Select Student</option>
+  {% endif %}
+    {% for idnumber in students %}
+      <option value="{{ idnumber.studentid }}"> {{ idnumber.studentid }}</option>
+    {% endfor %}
+  </select>
+</div>
+<br/>
+<br/>
+
+
+<div class="container">
+  <select id="cname">
+  {% if request.session.coursename %}
+    <option selected= {{ request.session.coursename }}>{{ request.session.coursename }}</option>
+  {% else %}
+    <option selected="">Select Course</option>
+  {% endif %}
+    {% for cname in enrollmentcinfo %}
+      <option value="{{ cname.coursename }}"> {{ cname.coursename }}</option>
+    {% endfor %}
+  </select>
+<br/>
+<br/>
+<button type="button" id="ebtn" class="btn btn-primary">Enroll</button>
+<br/>
+<br/>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <th>Student ID</th>
+      <th>Course ID</th>
+      <th>Course Name</th>
+      <th>Course Selection Code</th>
+      <th>Course Department</th>
+      <th>Instructor Name</th>
+    </thead>
+    <tbody>
+      {% for row in Enrollment %}
+      <tr>
+        <td>{{ row.studentid }}</td>
+        <td>{{ row.courseid }}</td>
+        <td>{{ row.coursename }}</td>
+        <td>{{ row.courseselectioncode }}</td>
+        <td>{{ row.coursedepartment }}</td>
+        <td>{{ row.instructorname }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("#ebtn").click(function() {
+      $.ajax({
+        url: "{% url 'enrollment' %}",
+        data: {
+          idnumber: $("#idnumber").val(),
+          cname: $("#cname").val(),
+        },
+        success: function(data) {
+          if(data == 'Success') {
+            window.location = "{% url 'enrollment' %}"
+          }
+          else if(data == 'E1') {
+            alert("You are already enrolled in 3 courses.")
+          }
+          else if(data == 'E2') {
+            alert("You are already enrolled in this course.")
+          }
+        }
+      });
+    });
+  $("#idnumber").change(function() {
+    $.ajax({
+      url: "{% url 'enrollment' %}",
+      data: {
+        idnumber:$("#idnumber").val()
+      },
+      success: function(data) {
+        window.location = "{% url 'enrollment' %}"
+      }
+    });
+  });
+});
+</script>
+
+{% endblock %}

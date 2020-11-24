@@ -1,0 +1,78 @@
+{% extends "students/base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1 class="txtcolor">Dashboard</h1>
+    </div>
+
+    <div class="card text-center">
+      <div class="card-header">
+        Student Statistics
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Students Enrolled</h5>
+        <p class="card-text">20</p>
+        <h5 class="card-title">Students by Year</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Freshman</th>
+              <th>Sophomore</th>
+              <th>Junior</th>
+              <th>Senior</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>6</td>
+              <td>7</td>
+              <td>7</td>
+            <tr>
+          </tbody>
+        </table>
+        <h5 class="card-title">Average GPA</h5>
+        <p class="card-text">3.6</p>
+      </div>
+    </div>
+
+    <div class="card text-center">
+      <div class="card-header">
+        Course Information
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Number of Courses</h5>
+        <p class="card-text">19</p>
+        <h5 class="card-title">Courses by Department</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Economics</th>
+              <th>Near East Language & Civ</th>
+              <th>Chemistry & Chemical Biology</th>
+              <th>I.T.</th>
+              <th>South Asian Studies</th>
+              <th>Psychology</th>
+              <th>Medical Sciences</th>
+              <th>Applied Mathematics</th>
+              <th>Engineering Sciences</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>5</td>
+              <td>1</td>
+              <td>1</td>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
